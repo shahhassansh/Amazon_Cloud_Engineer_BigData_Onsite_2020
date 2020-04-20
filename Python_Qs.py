@@ -36,18 +36,22 @@ print(index2(A,9))
 
 ## Second Approach
 
-def index2b(x,b):
-    start = 0
-    end = len(x)-1
-    while start < end:
-        mid = (start + end)//2 
-        if x[mid] == b:
-            return mid
-        elif (x[mid] < b and x[mid] < x[start]) or x[mid] > b:
-            end = mid-1
-        else:
-            start = mid+1
-    return -1
+def index2b(shiftArr,num):
+  start = 0
+  end = len(shiftArr) - 1 
+  while start <= end:
+    mid = (start + end)//2
+    if shiftArr[mid] == num:
+      return mid
+    elif shiftArr[start] <= num < shiftArr[mid] or (shiftArr[start] > shiftArr[mid] and not shiftArr[mid]<num<=shiftArr[end]):
+	# We choose left half if either : 
+	#    * left half is sorted and B in this range
+	#    * left half is not sorted, 
+	#      but B isn't in the sorted right half.
+      end = mid-1
+    else:
+      start = mid +1
+  return -1
 
 print(index2b(A,9))
 
